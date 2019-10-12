@@ -8,5 +8,8 @@ public class Test {
         double d = 0.45;
         String s = "123";
         System.out.println(Double.isNaN(d));
+        StringBuilder stringBuilder = new StringBuilder();
+        StringBuffer stringBuffer = new StringBuffer();
+        int[] a = new int[10];
     }
 }
