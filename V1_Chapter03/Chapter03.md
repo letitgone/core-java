@@ -62,4 +62,9 @@ StringBuffer是线程安全的。
 ### 3.10 数组
 1.数组是一种数据结构，用来存储同一类型值的集合，通过一个整型下标可以访问数组中的每一个值。   
 2.创建一个数字数组时，所有元素都初始化为0，boolean数组的元素会初始化为false，对象数组的元素则初始化为一个特殊值null。   
-3.一旦创建数组，就不能改变它的大小（尽管可以改变每一个数组元素）。
+3.一旦创建数组，就不能改变它的大小（尽管可以改变每一个数组元素）。   
+4.数组copy：   
+1)Arrays.copyOf(T[] original, int newLength)   
+2)Arrays.copyOfRange(T[] original, int from, int to)   
+5.二维数组：表达式balance[i]引用第i个子数组，也就是二维数组的第i行，它本身也是一个数组，balance[i][j]引用这个数组
+的第j项
