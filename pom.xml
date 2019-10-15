@@ -12,6 +12,7 @@
         <module>V1_Chapter02</module>
         <module>V1_Chapter03</module>
         <module>V1_Chapter04</module>
+        <module>V1_Chapter05</module>
     </modules>
 
     <build>
