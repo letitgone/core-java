@@ -30,4 +30,50 @@ final，而不包括域）。
 1）在抽象类中定义部分抽象类方法或者不定义抽象类方法，这样就必须将子类也标记为抽象类。   
 2）定义全部的抽象方法，这样一来，子类就不是抽象的了。   
 11.可以定义一个抽象类的对象变量，但是它只能引用非抽象子类的对象：Person p = new Student();   
-  
+### 5.2 Object:所有类的超类
+1.所有的数组类型，不管是对象数组还是基本类型数组都扩展了Object类。   
+2.Java语言规范要求equals()方法具有如下特性：   
+1）自反性：对于任何非空引用x，x.equals(x)应该返回true。   
+2）对称性：对于任何引用x和y，并且仅当y.equals(x)返回true，x.equals(y)也应该返回true。   
+3）传递性：对于任何引用x，y和z，如果x.equals(y)返回true，y.equals(z)返回true，那么x.equals(z)也应该返回true。   
+4）一致性：如果x和y引用的对象没有发生变化，反复调用x.equals(y)应该返回同样的结果。   
+5）对于任何非空引用x，x.equals(null)应该返回false。   
+3.hashCode方法：   
+1）散列码（hash code）是由对象导出的一个整型数值（也可以是负数），散列码是没有规律的，如果x和y是两个不同的对象，x.hashCode()与
+y.hashCode()基本上不会相同。   
+2）String类使用下面算法计算散列码：   
+```
+int hash = 0;
+for(int i = 0; i < length(); i++){
+    hash = 31 * hash + charAt(i);
+}
+```
+3）由于hashCode()定义在Object类中，因此每个对象都有一个默认的散列码，其值为对象的存储地址：   
+```
+String s = "Ok";
+StringBuilder sb = new StringBuilder(s);
+System.out.println(s.hashCode() + " " + sb.hashCode());
+String t = new String("Ok");
+StringBuilder tb = new StringBuilder(t);
+System.out.println(t.hashCode() + " " + tb.hashCode());
+```
+字符串s和t拥有相同的散列码，这是因为字符串的散列码是由内容导出的，而字符串缓冲sb和tb却有着不同的散列码，这是因为在
+StringBuilder类中没有定义hashCode()方法，它的散列码是由Object类的默认hashCode()方法导出的对象存储地址。如果重新
+定义equals方法，即必须重新定义hashCode()方法，以便用户可以将对象插入到散列表中。   
+4）equals()和hashCode()的定义必须一致，如果x.equals(y)返回true，那么x.hashCode()就必须与y.hashCode()具有相
+同的值。    
+### 5.3 泛型数组列表
+1.Java中，允许在运行时确定数组的大小。   
+2.Java SE7中，可以省去右边的类型参数：   
+```
+List<Employee> list = new ArrayList<Employee>(100);
+List<Employee> list = new ArrayList<>();
+```
+3.如果调用add且内部数组已经满了，数组列表就将自动地创建一个更大的数组，并将所有的对象从较小的数组中拷贝到较大的数组中。   
+4.如果已经清楚或能够估计出数组可能存储的元素数量，就可以在填充数组之前调用ensureCapacity()方法，这个方法调用将分配
+一个包含100个对象的内部数组，然后调用100次add，而不用重新分配空间，另外，还可以把初始容量传递给ArrayList构造器。   
+5.如果为数组分配100个元素的存储空间，数组就有100个空位置可以使用，而容量为100个元素的数组列表只是拥有保存100个元素
+的潜力（实际上，重新分配空间的话，将会超过100），但是在最初，甚至完成初始化构造之后，数组列表根本就不包含任何元素。   
+6.一旦能够确定数组列表的大小不再发生变化，就可以调用trimToSize()方法，增额方法将存储区域的大小调整为当前元素数量所
+需要的存储数目，垃圾回收器将回收多余的存储空间，一旦整理了数组列表的大小，添加新元素就需要花时间再次移动存储块，所以
+应该在确认不会添加任何元素时，再调用trimToSize()方法。   
