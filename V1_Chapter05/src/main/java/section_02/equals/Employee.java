@@ -1,4 +1,4 @@
-package section_01.equals;
+package section_02.equals;
 
 import java.time.LocalDate;
 import java.util.Objects;

@@ -1,4 +1,4 @@
-package section_01.equals;
+package section_02.equals;
 
 /**
  * This program demonstrates the equals method.

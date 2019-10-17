@@ -1,4 +1,4 @@
-package section_01.equals;
+package section_02.equals;
 
 public class Manager extends Employee {
     private double bonus;
