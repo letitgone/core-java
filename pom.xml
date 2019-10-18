@@ -13,6 +13,7 @@
         <module>V1_Chapter03</module>
         <module>V1_Chapter04</module>
         <module>V1_Chapter05</module>
+        <module>V1_Chapter06</module>
     </modules>
 
     <build>
