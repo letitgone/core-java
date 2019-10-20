@@ -4,10 +4,5 @@
  */
 public interface InterfaceB{
 
-    double d = 1.0;
-
-
-//    void B();
-
-    String A(double d);
+//    void getName();
 }

@@ -11,12 +11,95 @@
 ### 6.1 接口
 1.在Java程序设计语言中，接口不是类，而是对类的一组需求描述，这些类要遵从接口描述的统一格式进行定义。   
 2.接口中的所有方法自动属于public，声明方法时不用提供关键字，如果接口方法使用private，protected修饰，编译器会提示
-报错。在实现接口时，实现类必须把方法声明为public，使用private，protected编译器都会提示报错，Attempting to assign 
-weaker access privileges ('private'); was 'public'试图分配较弱的访问权限。   
+报错。在实现接口时，实现类必须把方法声明为public，使用private，protected编译器都会提示报错，Attempting
+to assign weaker access privileges ('private'); was
+'public'试图分配较弱的访问权限。   
 3.在接口中可以定义常量，接口绝不能含有实例域，接口没有实例，可以将接口看成是没有实例域的抽象类。   
-4.接口可以继承接口，并可以覆盖接口方法，接口中可以定义域（可以只包含域），但是域将被自动地设置为public static final。   
-5.
-6.
-7.
-
-
+4.接口可以继承接口，并可以覆盖接口方法，接口中可以定义域（可以只包含域），但是域将被自动地设置为public
+static final。
+5.接口跟抽象类的区别：每个类只能扩展一个类，而接口可以实现多个，即：接口可以实现多重继承。多重继承会让语言本身变得非
+常复杂，效率也会降低，实际上，接口可以提供多重继承的大多数好处，同时还能避免多重继承的复杂性和低效率。   
+6.可以为接口方法提供一个默认实现，使用default关键字，修改方法（Java SE8新特性），默认方法可以调用任何其他方法。默
+认方法的一个重要用法是"接口演化"，以Collcetion接口为例，这个接口作为Java的一部分已经很多年了，假设很久以前你提供了
+一个这样的类：public class Bag Implements Collection，后来Java SE8，又为这个接口增加了一个stream方法，假设
+stream方法不是默认方法，那么Bag类将不能编译，因为它没有实现这个新方法，为接口增加一个非默认方法不能保证"源代码兼容"，
+将方法实现为一个默认方法就可以解决这个问题，Bag类又能正常编译了，另外如果没有重新编译而直接加载这个类，并在一个Bag实
+例上调用stream方法，将调用Collection.stream方法。   
+7.如果先在一个接口中将一个方法定义为默认方法，然后又在超类或另一个接口中定义了同样的方法，解决方法如下：   
+1）超类优先：如果超类提供了一个具体方法，同名而且具有相同参数类型的默认方法会被忽略。   
+2）接口冲突：如果一个超接口提供了一个默认方法，另一个接口提供了一个同名而且参数类型（不论是否是默认参数）相同的方法，
+必须覆盖这个方法来解决冲突(类优先原则)。
+### 6.2 接口示例
+1.回调（callback）是一种常见的程序设计模式，在这种设计模式中，可以指出某个特定事件发生时应该采取的动作。
+### 6.3 lambda表达式
+1.lambda表达式是一个可传递的代码块，可以在以后执行一次或多次。   
+2.lambda(λ):数学中带参数变量的表达式   
+```
+(String first, Stirng second)
+    -> first.length() - second.length()
+```
+或者：
+```$xslt
+(String first, String second) ->
+    {
+        if(first.length() < second.length()){
+            return -1;
+        }else if(first.length() > second.length()){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+```
+即使lambda表达式没有参数，仍然要提供括号，就像无参数方法一样：
+```$xslt
+() -> 
+    {
+        for(int i = 100, i >= 0; i--){
+            System.out.println(i);
+        }  
+    }
+```
+如果可以推导出一个lambda表达式的参数类型，则可以忽略其类型：
+```$xslt
+Comparator<String> comp = (first, second)
+       -> first.length() - second.length();
+```
+如果方法只有一个参数，而且这个参数的类型可以推导得出，那么甚至还可以省略小括号：
+```$xslt
+ActionListenner listener = event -> 
+    System.out.println("The time is " + new Data());
+```
+如果一个lambda表达式只在某些分支返回一个值，而在另外一些分支不返回值，这是不合法的：
+```$xslt
+(int x) -> {if(x > 0) return 1;}
+```
+3.对于只有一个抽象方法的接口，需要这种接口的对象时，就可以提供一个lambda表达式，这种接口称为函数式接口。   
+4.关于代码块以及自由变量值有一个术语：闭包（closure），Java中，lambda表达式就是闭包。   
+5.在lambda表达式中，只能引用值不会改变的变量，如果在lambda表达式中改变变量，并发执行多个动作时就不会安全。另外，如
+果在lambda表达式中引用变量，而这个变量可能在外部改变，这也是不合法的。这里有一条规则，lambda表达式中捕获的变量必须
+实际上时最终变量，实际上的最终变量是指：这个变量初始化之后就不会再为它赋新值。   
+6.lambda表达式中声明一个与局部变量同名的参数或者局部变量是不合法的。   
+7.在一个lambda表达式中使用this关键字时，是指创建这个lambda表达式的方法的this参数：
+```$xslt
+public class Application{
+   public void init(){
+      ActionListener listener = event ->
+      {
+         System.out.println(this.toString());
+      }
+   }
+}
+```
+表达式this.toString()会调用Application对象的toString方法。   
+8.使用lambda表达式的重是延迟执行，之所以希望以后再执行代码，有很多原因。   
+### 6.4 内部类
+1.内部类（inner class）是定义在另一个类中的类，为什么需要内部类：   
+1）内部类方法可以访问该类定义所在的作用域中的数据，包括私有的数据。   
+2）内部类可以对同一个包中的其他类隐藏起来。   
+3）当想要定义一个回调函数且不想编写大量代码时，使用匿名内部类比较便捷。   
+2.一个内部类既可以访问自身的数据域，也可以访问创建它的外围类对象的数据域，内部类的对象总有一个隐式引用，它指向了创建
+它的外部对象，这个引用种子内部类的定义中是不可见的。   
+3.只有内部类可以是私有的，而常规类只可以具有包可见性，或公有可见性。   
+4.内部类中声明的所有静态域都必须是final的，我们希望一个静态域只能有一个实例，不过对于每个外部对象，会分别有一个单独
+的内部类实例，如果这个域不是final，它可能就不是唯一的。   
