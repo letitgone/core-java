@@ -28,4 +28,9 @@
 ```
 staff.forEach((k, v) -> System.out.println("key=" + k + ", value=" + v));
 ```
-2.
+### 9.4 视图与包装器
+### 9.5 算法
+1.Java实现二分查找用Collections.binarySearch(c, element)，集合必须是排好序的，只能使用ArrayList进行随机访问，
+如果提供linkedList则没有意义，它将自动变为线性查找。   
+2.Java SE8增加了默认方法Collection.removeIf和List.replaceAll方法。   
+### 9.6 遗留的集合
