@@ -17,6 +17,7 @@
         <module>V1_Chapter07</module>
         <module>V1_Chapter08</module>
         <module>V1_Chapter09</module>
+        <module>V1_Chapter14</module>
     </modules>
 
     <dependencies>
