@@ -62,4 +62,28 @@ b.当线程等待另一个线程通知调度器一个条件时，它自己进入
 6.java.util.concurrent.atomic包中有很多类使用了很高效的机器级指令（而不是使用锁）来保证其他操作的原子性，例如，
 AtomaicInteger提供了方法incrementAndGet和decrementAndGet，它们分别以原子的方式将一个整数自增或自减。   
 7.所有线程都被阻塞，这样的状态成为死锁。   
-
+### 14.6 阻塞队列
+1.生产者线程向队列插入元素，消费者线程则取出它们，使用队列，可以安全地从一个线程向另一个线程传递数据，当试图向队列添
+加元素而队列已满，或是想从队列移出元素而队列为空的时候会导致阻塞队列。 
+2.阻塞队列方法
+![Image text](src/main/resources/image/BlockingQueueMethods.jpeg) 
+poll和peek方法返回空来指示失败，因此，向这些队列中插入null值是非法的。   
+### 14.7 线程安全的集合
+1.ArrayList和HashMap不是线程安全的，集合库中提供了不同的机制，热河集合类都可以通过使用同步包装变成线程安全的：
+```
+List<E> synchArrayList = Collections.synchronizedList(new ArrayList<E>());
+Map<K,V> synchHashMap = Collections.synchronizedMap(new HashMap<K,V>());
+```
+最好使用java.util.concurrent包中的集合。
+### 14.8 Callable与Future
+### 14.9 执行器
+1.创建一个新的线程是有一定代价的，因为涉及与操作系统交互，如果在程序中创建大量的生命期很短的线程，应该使用线程池，一
+个线程池中包含许多准备运行的空闲线程，将Runnable对象交给线程池，就会有一个线程调用run方法，当run方法退出时，线程不
+会死亡，而是在池中准备为下一个请求提供服务。使用线程池的另一个理由是减少并发线程的数目，创建大量线程会大大降低性能甚
+至使虚拟机崩溃。执行器（Executor）：
+![Image text](src/main/resources/image/ExecutorFactoryMethods.jpeg) 
+2.使用线程池时应该做的事：1）调用Executors类中的静态方法newCachedThreadPool或newFixedThreadPool；2）调用submit
+提交Runnable或Callable对象；3）如果想要取消一个任务，或者如果提交Callable对象，那就要保存好返回的Future对象；4）
+当不再提交任何任务时，调用shutdown。   
+### 14.10 同步器
+### 14.11 线程与Swing
