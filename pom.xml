@@ -20,6 +20,7 @@
         <module>V1_Chapter14</module>
         <module>V2_Chapter01</module>
         <module>V2_Chapter02</module>
+        <module>V2_Chapter03</module>
     </modules>
 
     <dependencies>
