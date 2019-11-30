@@ -1,6 +1,6 @@
 # Core Java(Volume 2_Advanced Features)
     core java notes
-## V1_Chapter 3 XML
+## V2_Chapter 3 XML
 ### 3.1 XML概述
 1.XML大小写是敏感的；XML中结束标签绝对不能省略；在XML中，属性值必须用引号括起来；在XML中，所有属性必须有值。   
 2.XML应当以一个文档头开始例如：

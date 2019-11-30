@@ -1,6 +1,6 @@
 # Core Java(Volume 2_Advanced Features)
     core java notes
-## V1_Chapter 6 日期和时间API
+## V2_Chapter 6 日期和时间API
 ### 6.1 时间线
 1.原子钟网络一直被当作官方时间。   
 2.在Java中，Instant表示时间线上的某个点，被称为"新纪元"的时间线原点被设置为穿过伦敦格林威治皇家天文台的本初子午线

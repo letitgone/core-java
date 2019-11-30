@@ -1,6 +1,6 @@
 # Core Java(Volume 2_Advanced Features)
     core java notes
-## V1_Chapter 1 Java SE 8的流库
+## V2_Chapter 1 Java SE 8的流库
 ### 1.1 从迭代到流的操作
 ### 1.2 流的创建
 ### 1.3 filter，map和flatMap方法

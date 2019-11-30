@@ -1,6 +1,6 @@
 # Core Java(Volume 2_Advanced Features)
     core java notes
-## V1_Chapter 4 网络
+## V2_Chapter 4 网络
 ### 4.1 连接到服务器
 1.Socket是网络软件中的一个抽象概念，负责启动该程序内部和外部之间的通信。   
 2.Java不仅支持TCP协议，也支持UDP协议，该协议可以用于发送数据包（也称为数据报），它所需付出的开销要比TCP少得多，UDP

@@ -1,6 +1,6 @@
 # Core Java(Volume 2_Advanced Features)
     core java notes
-## V1_Chapter 2 输入与输出
+## V2_Chapter 2 输入与输出
 ### 2.1 输入/输出流
 ### 2.2 文本输入与输出
 ### 2.3 读写二进制数据
