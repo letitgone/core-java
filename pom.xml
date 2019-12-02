@@ -27,6 +27,7 @@
         <module>V2_Chapter07</module>
         <module>V2_Chapter08</module>
         <module>V2_Chapter09</module>
+        <module>V2_Chapter12</module>
     </modules>
 
     <dependencies>
